@@ -32,7 +32,7 @@
 
 
 ## 테이블
-User(user_email[PK], user_password, user_passwordcheck, user_nickname, 
+User(user_email[PK], user_password, user_nickname, 
     user_phone_number, user_address, user_address_detail, user_profile)
 
 ### 기술 
