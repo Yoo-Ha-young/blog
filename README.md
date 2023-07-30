@@ -29,7 +29,11 @@
   : 인기 검색어가 우측에 존재하도록 한다.
 - 네비게이션 바
   : 상단에는 네비게이션 바가 있고, 검색을 할 수 있다.
-  
+
+
+## 테이블
+User(user_email, user_password, user_passwordcheck, user_nickname, 
+    user_phone_number, user_address, user_address_detail, user_profile)
 
 ### 기술 
 - React
