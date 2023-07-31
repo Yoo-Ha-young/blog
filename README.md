@@ -32,8 +32,10 @@
 
 
 ## 테이블
-User(user_email[PK], user_password, user_nickname, 
+- **User**(user_email[PK], user_password, user_nickname, 
     user_phone_number, user_address, user_profile)
+- **Board**(board_title, board_content, board_image, board_video, board_file)
+  
 
 ### 기술 
 - React
