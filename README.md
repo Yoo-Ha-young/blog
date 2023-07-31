@@ -47,15 +47,21 @@
 ## 테이블
 - **User**(user_email[PK], user_password, user_nickname, 
     user_phone_number, user_address, user_profile)
-- **Board**(board_number[PK], board_title, board_content, board_image, board_video, board_file, board_writer[FK-User(user_email)], board_write_date, board_click_count)
-- **PopularSerach**(popular_term, popular_search_count)
-- **Like**(board_number[FK-Board(board_number)], user_email[FK-User(user_email)])
-- **Comment**(board_number[FK-Board(board_number)], user_email[FK-User(user_email)], comment_write_date, comment_content)
+  
+- **Board**(board_number[PK], board_title, board_content, board_image, board_video, board_file, board_writer[FK-User(user_email)], board_writer_profile, board_writer_nickname, board_write_date, board_click_count, board_like_count, board_comment_count)
+  
+- **PopularSerach**(popular_term[PK], popular_search_count)
+  
+- **Like**(board_number[FK-Board(board_number)], user_email[FK-User(user_email)], like_user_profile, like_user_nickname)
+  
+- **Comment**(board_number[FK-Board(board_number)], user_email[FK-User(user_email)], comment_write_date, comment_content, like_user_profile, like_user_nickname)
 
 - User - Board 관계
   1. User가 Board를 작성한다. **1:n**
   2. User가 Board에 좋아요를 누른다. **n:m**
   3. User가 Board에 댓글을 작성한다. **n:m**
+
+
 
 ### 기술 
 - React
