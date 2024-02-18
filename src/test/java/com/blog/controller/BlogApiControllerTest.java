@@ -5,7 +5,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.blog.dto.UpdateArticleRequest;
 import java.util.Optional;
+import javax.xml.transform.Result;
 import org.assertj.core.util.Arrays;
 import com.blog.domain.Article;
 import com.blog.dto.AddArticleRequest;
@@ -168,4 +170,38 @@ class BlogApiControllerTest {
             assertThat(article).isEmpty();
         }
     }
+
+    @DisplayName("updateArticle: 블로그 글 수정에 성공한다.")
+    @Test
+    public void updateArticle() throws Exception {
+        // given
+        final String url = "/api/articles/{id}";
+        final String title = "title";
+        final String content = "content";
+
+
+        Article savedArticle = blogRepository.save(Article.builder()
+                .title(title)
+                .content(content)
+            .build());
+
+        final String newTitle = "new title";
+        final String newContent = "new content";
+
+        UpdateArticleRequest request = new UpdateArticleRequest(newTitle, newContent);
+
+        // when
+        ResultActions result = mockMvc.perform(put(url, savedArticle.getId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(new ObjectMapper().writeValueAsString(request)))
+            .andExpect(status().isOk());
+
+        // then
+        result.andExpect(status().isOk());
+        Optional<Article> article = blogRepository.findById(savedArticle.getId());
+        assertThat(article.get().getTitle()).isEqualTo(newTitle);
+        assertThat(article.get().getContent()).isEqualTo(newContent);
+
+    }
+
 }

@@ -3,6 +3,7 @@ package com.blog.controller;
 import com.blog.domain.Article;
 import com.blog.dto.AddArticleRequest;
 import com.blog.dto.ArticleResponse;
+import com.blog.dto.UpdateArticleRequest;
 import com.blog.service.BlogService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,5 +61,13 @@ public class BlogApiController {
     public ResponseEntity<Void> deleteArticlesByIds(@RequestBody List<Long> ids) {
         blogService.deleteAllByIds(ids);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/api/articles/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody
+        UpdateArticleRequest request) {
+        Article updateArticle = blogService.update(id, request);
+
+        return ResponseEntity.ok().body(updateArticle);
     }
 }

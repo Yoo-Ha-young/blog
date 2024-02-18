@@ -9,11 +9,12 @@ import jakarta.persistence.Id;
 import javax.annotation.processing.Generated;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
+@Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Article {
 
