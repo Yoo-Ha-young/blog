@@ -4,7 +4,9 @@ import com.blog.domain.Article;
 import com.blog.dto.AddArticleRequest;
 import com.blog.dto.ArticleResponse;
 import com.blog.dto.UpdateArticleRequest;
+import com.blog.repository.UserRepository;
 import com.blog.service.BlogService;
+import java.security.Principal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,10 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class BlogApiController {
 
     private final BlogService blogService;
-
+    private final UserRepository userRepository;
     @PostMapping("/api/articles")
-    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request) {
-        Article saveArticle = blogService.save(request);
+    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request,
+        Principal principal) {
+
+        String nickname = userRepository.findByEmail(principal.getName()).get().getNickname();
+
+        Article saveArticle = blogService.save(request, nickname);
 
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(saveArticle);

@@ -13,3 +13,6 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+jwt:
+  issuer: bluekitten76@naver.com
+  secret_key: my-blog
